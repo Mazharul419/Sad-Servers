@@ -36,6 +36,7 @@ cut -d " " -f 1 home/admin/access.log | head
 Using the uniq command with -c enables me to show how many duplicates of each ip address there are
 
 cut -d " " -f 1 home/admin/access.log | uniq -c | head
+
      23 83.149.9.216
       1 24.236.252.67
       6 93.114.45.13
@@ -50,6 +51,7 @@ cut -d " " -f 1 home/admin/access.log | uniq -c | head
 This can be sorted using the sort command:
 
 admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log | uniq -c | head | sort
+
       1 1.22.35.226
       1 100.43.83.137
       1 100.43.83.137
@@ -64,6 +66,7 @@ admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log | uniq -c | head
 Using the tail instead of head function with the -n 1 argument allows me to see the ip address with the most connections:
 
 admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log | uniq -c | sort | tail -n 1
+
      97 75.97.9.59
 
 The file can now be written to the highest ip file using the echo command:
