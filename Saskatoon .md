@@ -23,10 +23,7 @@ as such the command is:
      admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log
 
 The result is a list of all the ip addresses by themselves
-
-It is quite large, so I pipe this into a head command to give me a overview:
-
-     cut -d " " -f 1 home/admin/access.log | head
+# EDIT BELOW TO INCLUDE MORE THAN ONE IP ADDRESS
      83.149.9.216
      83.149.9.216
      83.149.9.216
