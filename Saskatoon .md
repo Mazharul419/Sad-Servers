@@ -1,8 +1,27 @@
-# Saskatoon
+# Saskatoon 🇨🇦
+> City in Saskatchewan, Canada
+<br>
+This server tests the ability of the user to seperate out a string of text from a log file and write the output to an existing file.
+
+#### Commands used
+* `cut`
+* `awk`
+* `cat`
+* `pipe "|"`
+* `sort`
+* `uniq`
+* `tail`
+
 
 ## Brief
 
 <img width="1742" height="645" alt="image" src="https://github.com/user-attachments/assets/bb7f51c7-0bd1-4501-bafb-22b3c0e2abf1" />
+
+### 1. Problem Setup
+
+From the brief - there is a web server access log file `access.log` located in `home/admin/`
+
+The file will have a 
 
 ### For this server there are 2 approaches using the `cut` and `awk` command:  
 
@@ -92,7 +111,7 @@ HOWEVER since this counts ADJACENT duplicates the list needs to be sorted first 
 
 The `uniq` command with the `-c` argument then prints the ip addresses along with the count of duplicates for it:
 
-      admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log | uniq -c | head | sort
+      admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log | sort | uniq -c
       1 1.22.35.226
       1 100.43.83.137
       1 100.43.83.137
