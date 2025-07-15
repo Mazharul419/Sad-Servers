@@ -4,42 +4,44 @@
 
 <img width="1742" height="645" alt="image" src="https://github.com/user-attachments/assets/bb7f51c7-0bd1-4501-bafb-22b3c0e2abf1" />
 
-### For this server there are 2 approaches using the cut and awk command:  
+### For this server there are 2 approaches using the `cut` and `awk` command:  
 
-#### 1) Using cut command:
+#### 1) Using `cut` command:
 
-To use the cut command the syntax is as follows:
+To use the `cut` command the syntax is as follows:
 
-     cut -d "delimiter" -f (field number) file.txt
+```
+cut -d "delimiter" -f (field number) file.txt
+```
 
 Where
 
-delimiter - this will be a space " "
-field number - as the ip address is the first field printed, this is set to 1
-file.txt - this is the file - the full path to the access.log file is specified
+`delimiter` - this will be a space "` `"
+`field number` - as the ip address is the first field printed, this is set to 1
+`file.txt` - this is the file - the full path to the access.log file is specified
 
 as such the command is:
 
      admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log
 
   
-#### 2) Using awk command:
+#### 2) Using `awk` command:
 
-Before using the awk command the file first needs to be concatenated using the cat command and then piped into awk. The first part of the syntax is:
+Before using the `awk` command the file first needs to be concatenated using the `cat` command and then piped into `awk`. The first part of the syntax is:
 
      cat /home/admin/access.log | 
 
-The syntax for the awk command is:
+The syntax for the `awk` command is:
 
-     awk '{ print f 1 }'
+     awk '{ print $1 }'
 
-Where f denotes the field
+Where `f` denotes the field
 
-The awk command counts strings of non-blank non-line as fields by default
+The `awk` command counts strings of non-blank non-line as fields by default
 
-As the ip address is the first string, this is set to 1.
+As the ip address is the first string, this is set to 1 - awk uses $ to denote field so this is `$1`.
 
-print simply means to write to standard output
+`print` simply means to write to standard output
 
 
 The resulting command is:
@@ -64,9 +66,9 @@ The result is a list of all the ip addresses by themselves
      180.76.6.56
      46.105.14.53
 
-Using the uniq command can show duplicates of each ip address there are.
+Using the `uniq` command can show duplicates of each ip address there are.
 
-HOWEVER since this counts ADJACENT duplicates the list needs to be sorted first for uniq to identify these:
+HOWEVER since this counts ADJACENT duplicates the list needs to be sorted first for `uniq` to identify these:
 
     admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log | sort
      1.22.35.226
@@ -88,7 +90,7 @@ HOWEVER since this counts ADJACENT duplicates the list needs to be sorted first 
      .
      .
 
-The uniq command with the -c argument then prints the ip addresses along with the count of duplicates for it:
+The `uniq` command with the `-c` argument then prints the ip addresses along with the count of duplicates for it:
 
       admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log | uniq -c | head | sort
       1 1.22.35.226
@@ -105,12 +107,12 @@ The uniq command with the -c argument then prints the ip addresses along with th
       .
       .
 
-Using the tail instead of head function with the -n 1 argument allows me to see the ip address with the most connections:
+Using the `tail` instead of `head` function with the `-n 1` argument allows me to see the ip address with the most connections:
 
      admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log | uniq -c | sort | tail -n 1
      97 75.97.9.59
 
-The file can now be written to the highest ip file using the echo command:
+The file can now be written to the highest ip file using the `echo` command:
 
      echo "75.97.9.59" > home/admin/highestip.text
 
