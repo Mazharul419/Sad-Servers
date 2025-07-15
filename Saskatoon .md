@@ -4,9 +4,9 @@
 
 <img width="1742" height="645" alt="image" src="https://github.com/user-attachments/assets/bb7f51c7-0bd1-4501-bafb-22b3c0e2abf1" />
 
-For this server there are 2 approaches using the cut and awk command:
+### For this server there are 2 approaches using the cut and awk command:  
 
-1) Using cut command:
+#### 1) Using cut command:
 
 To use the cut command the syntax is as follows:
 
@@ -22,9 +22,29 @@ as such the command is:
 
      admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log
 
-2) Using awk command:
+  
+#### 2) Using awk command:
 
-To use the awk command the file needs to be concatenated using the cat command and piped into itc
+Before using the awk command the file first needs to be concatenated using the cat command and then piped into awk. The first part of the syntax is:
+
+     cat /home/admin/access.log | 
+
+The syntax for the awk command is:
+
+     awk '{ print f 1 }'
+
+Where f denotes the field
+
+The awk command counts strings of non-blank non-line as fields by default
+
+As the ip address is the first string, this is set to 1.
+
+print simply means to write to standard output
+
+
+The resulting command is:
+
+     cat /home/admin/access.log | awk '{ print f 1 }'
 
 The result is a list of all the ip addresses by themselves
 
