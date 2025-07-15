@@ -22,6 +22,10 @@ as such the command is:
 
      admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log
 
+2) Using awk command:
+
+To use the awk command the file needs to be concatenated using the cat command and piped into itc
+
 The result is a list of all the ip addresses by themselves
 
      83.149.9.216
@@ -64,7 +68,7 @@ HOWEVER since this counts ADJACENT duplicates the list needs to be sorted first 
      .
      .
 
-This can be sorted using the sort command:
+The uniq command with the -c argument then prints the ip addresses along with the count of duplicates for it:
 
       admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log | uniq -c | head | sort
       1 1.22.35.226
