@@ -23,26 +23,46 @@ as such the command is:
      admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log
 
 The result is a list of all the ip addresses by themselves
-# EDIT BELOW TO INCLUDE MORE THAN ONE IP ADDRESS
-     83.149.9.216
-     83.149.9.216
-     83.149.9.216
-     83.149.9.216
-     83.149.9.216
 
-Using the uniq command with -c enables me to show how many duplicates of each ip address there are
+     83.149.9.216
+     83.149.9.216
+     83.149.9.216
+     83.149.9.216
+     83.149.9.216
+     .
+     .
+     .
+     82.165.139.53
+     100.43.83.137
+     63.140.98.80
+     63.140.98.80
+     66.249.73.135
+     180.76.6.56
+     46.105.14.53
 
-     cut -d " " -f 1 home/admin/access.log | uniq -c | head
-     23 83.149.9.216
-      1 24.236.252.67
-      6 93.114.45.13
-      1 66.249.73.135
-      1 50.16.19.13
-      1 66.249.73.185
-      1 110.136.166.128
-      1 46.105.14.53
-      4 110.136.166.128
-      1 123.125.71.35
+Using the uniq command can show duplicates of each ip address there are.
+
+HOWEVER since this counts ADJACENT duplicates the list needs to be sorted first for uniq to identify these:
+
+    admin@ip-172-31-27-155:/$ cut -d " " -f 1 home/admin/access.log | sort
+     1.22.35.226
+     1.22.35.226
+     1.22.35.226
+     1.22.35.226
+     1.22.35.226
+     1.22.35.226
+     100.2.4.116
+     100.2.4.116
+     100.2.4.116
+     100.2.4.116
+     100.2.4.116
+     100.2.4.116
+     100.43.83.137
+     100.43.83.137
+     100.43.83.137
+     .
+     .
+     .
 
 This can be sorted using the sort command:
 
@@ -57,6 +77,9 @@ This can be sorted using the sort command:
       1 100.43.83.137
       1 100.43.83.137
       1 100.43.83.137
+      .
+      .
+      .
 
 Using the tail instead of head function with the -n 1 argument allows me to see the ip address with the most connections:
 
@@ -66,3 +89,5 @@ Using the tail instead of head function with the -n 1 argument allows me to see 
 The file can now be written to the highest ip file using the echo command:
 
      echo "75.97.9.59" > home/admin/highestip.text
+
+     
